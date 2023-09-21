@@ -10,13 +10,14 @@ import { MatCardModule } from "@angular/material/card";
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +29,7 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angula
     MatGridListModule,
     MatIconModule,
     MatDialogModule,
+    MatToolbarModule
 
   ],
   providers: [],
