@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<mat-grid-list cols="6" rowHeight="400px">
+<mat-grid-list [cols]="mybreakpoint"  (window:resize)="handleSize($event)" rowHeight="400px">
   <mat-grid-tile *ngFor="let employee of employees">
     <mat-card class="mat-card">
       <mat-card-header>

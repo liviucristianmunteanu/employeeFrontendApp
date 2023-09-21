@@ -16,7 +16,7 @@ export interface DialogData {
 export class AppComponent implements OnInit{
   public employees: Employee[] = [];
   name!: string;
-
+  mybreakpoint: number | undefined;
 
   constructor (private employeeService:EmployeeService,
     public dialog: MatDialog){}
@@ -24,7 +24,11 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
       this.getEmployees();
       this.name;
+      this.mybreakpoint = (window.innerWidth <= 600) ? 1 : 6;
   }
+  handleSize(event:any) {
+    this.mybreakpoint = (event.target.innerWidth <= 600) ? 1 : 6;
+    }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       data: {name:this.name},
