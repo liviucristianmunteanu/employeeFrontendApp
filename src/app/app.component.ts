@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Inject, OnInit } from '@angular/core';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
-import { HttpResponse } from '@angular/common/http';
+
+
+export interface DialogData {
+  name: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -10,11 +15,25 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class AppComponent implements OnInit{
   public employees: Employee[] = [];
+  name!: string;
 
-  constructor (private employeeService:EmployeeService){}
+
+  constructor (private employeeService:EmployeeService,
+    public dialog: MatDialog){}
 
   ngOnInit(): void {
       this.getEmployees();
+      this.name;
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      data: {name:this.name},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.employees = result;
+    });
   }
 
   public getEmployees():void{
@@ -24,4 +43,20 @@ export class AppComponent implements OnInit{
       }
     );
   }
+}
+
+
+
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: 'dialog-overview-example-dialog.html',
+
+})
+export class DialogOverviewExampleDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+
 }

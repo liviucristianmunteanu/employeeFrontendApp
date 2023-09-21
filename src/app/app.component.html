@@ -1,33 +1,37 @@
-<mat-grid-list cols="3" rowHeight="600px">
+<mat-grid-list cols="6" rowHeight="400px">
   <mat-grid-tile *ngFor="let employee of employees">
-    <div class="mat-card" style="text-align: center;">
-      <div class="mat-card-header">
-        <img src="{{employee.imageUrl}}" class="mat-card-md-image" alt=""/>
-      </div>
+    <mat-card class="mat-card">
+      <mat-card-header>
+        <mat-card-title>
+          <h2 class="card-title">{{ employee.name }}</h2>
+        </mat-card-title>
 
-      <div class="mat-card-content">
-        <div>
-          <h2 class="card-title">{{employee.name}}</h2>
+        <mat-card-subtitle>
+          <h3 class="card-text">{{ employee.jobTitle }}</h3>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content class="mat-card-content">
+        <div style="text-align: center">
+            <img
+              src="{{ employee.imageUrl }}"
+              class="mat-card-md-image"
+              alt=""
+            />
+            <div>
+              <p class="card-text">{{ employee.email }}</p>
+            </div>
+            <div>
+              <p class="card-text">{{ employee.phone }}</p>
+            </div>
         </div>
-        <mat-divider></mat-divider>
-        <div>
-          <h3 class="card-text">{{employee.jobTitle}}</h3>
-        </div>
-        <div>
-          <p class="card-text">{{employee.email}}</p>
-        </div>
-        <div>
-          <p class="card-text">{{employee.phone}}</p>
-        </div>
-        <mat-divider></mat-divider>
-        <div>
-          <button mat-raised-button color="primary">Details</button>
-        </div>
-      </div>
-    </div>
-
-
+      </mat-card-content>
+      <mat-card-actions style="text-align: center">
+        <button mat-raised-button color="primary" (click)="openDialog()">
+          edit
+        </button>
+        <button mat-raised-button color="warn">delete</button>
+      </mat-card-actions>
+    </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
-
-
