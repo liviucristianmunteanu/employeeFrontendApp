@@ -2,6 +2,9 @@ import { Component,Inject, OnInit } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
+import { FormGroup, FormControl} from '@angular/forms';
+
+
 
 
 export interface DialogData {
@@ -29,17 +32,6 @@ export class AppComponent implements OnInit{
   handleSize(event:any) {
     this.mybreakpoint = (event.target.innerWidth <= 600) ? 1 : 6;
     }
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      data: {name:this.name},
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.employees = result;
-    });
-  }
-
   public getEmployees():void{
     this.employeeService.getEmployees().subscribe(
       (response: Employee[])=>{
@@ -47,20 +39,4 @@ export class AppComponent implements OnInit{
       }
     );
   }
-}
-
-
-
-
-@Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: 'dialog-overview-example-dialog.html',
-
-})
-export class DialogOverviewExampleDialog {
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-  ) {}
-
 }
